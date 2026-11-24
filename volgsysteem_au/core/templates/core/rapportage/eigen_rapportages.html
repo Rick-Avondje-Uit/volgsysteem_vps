@@ -1,0 +1,17 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+<title>Rapportages</title>
+{% endblock %}
+
+{% block body_block %}
+    {% if rapportages %}
+        {% for rapportage in rapportages %}
+            <h3>{{rapportage.datum}}</h3>
+            <h5>Rapportage ingevuld door {{rapportage.ingevuld_door}}</h5>
+            <p>{{rapportage.tekst}}</p>
+        {% endfor %}
+    {% else %}
+        <h3>Geen rapportages gevonden.</h3>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "core/base.html" %}
+{% block body_block %}
+
+<ul id="menu">
+    <li><a href="{% url 'core:index' %}">Home</a>
+    </li>
+    <li><div>
+        <a href="{% url 'survey-list'%}">Vragenlijst</a>
+    </div>
+    </li>
+    </ul>
+  <script>
+    $(document).ready(function() {
+      $("#menu").menu();})
+
+  </script>
+
+<div class="jumbotron">
+    <h2>Inloggen</h2>
+    <h3>Momenteel kunnen alleen administrators en begeleiders een account aanmaken.</h3>
+    {% if form.errors %}
+        <p>Email of wachtwoord is incorrect, probeer opnieuw.</p>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="'btn btn-primary" value="Login">
+        <input type="hidden" name="next" value="{{next}}">
+    </form>
+    <button><a href="{% url 'password_reset' %}">Wachtwoord vergeten</a></button>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load group_tags %}
+
+{% block main_title %}
+    <title>Doelen van {{ deelnemer.naam }}</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Doelen van {{ deelnemer.naam }}</h1>
+    {% if doelen %}
+        <section class="doelen" aria-label="Doelen van {{ deelnemer.naam }}">
+            {% for doel in doelen %}
+                <article class="doel">
+                    <button type="button" class="clickable-hoofddoel" data-target-id="subdoelen-{{ doel.id }}" aria-controls="subdoelen-{{ doel.id }}" aria-expanded="false">{{ doel.tekst }}</button>
+                    <div id="subdoelen-{{ doel.id }}" class="subdoelen" hidden>
+                        {% if doel.subdoelen %}
+                            {% for subdoel in doel.subdoelen %}
+                                <section class="subdoel">
+                                    {% if doel.type_doel == "methodiek" %}
+                                        <button type="button" class="clickable-subdoel" data-target-id="rapportages-methodiek-{{ subdoel.id }}" aria-controls="rapportages-methodiek-{{ subdoel.id }}" aria-expanded="false">{{ subdoel.tekst }}</button>
+                                        <div id="rapportages-methodiek-{{ subdoel.id }}" class="rapportages" hidden>
+                                            {% if subdoel.rapportages %}
+                                                {% for rapportage in subdoel.rapportages %}
+                                                    <article class="rapportage">
+                                                        <p>{{ rapportage.tekst }}</p>
+                                                        {% if rapportage.begeleider %}
+                                                            <p><strong>Begeleider:</strong>{{ rapportage.begeleider }}</p>
+                                                        {% endif %}
+                                                        {% if rapportage.datum %}
+                                                            <p><strong>Datum:</strong>{{ rapportage.datum|date:"d-m-Y" }}</p>
+                                                        {% endif %}
+                                                    </article>
+                                                {% endfor %}
+                                            {% else %}
+                                                <p class="text-muted">Geen rapportages beschikbaar.</p>
+                                            {% endif %}
+                                        </div>
+                                    {% else %}
+                                        <button type="button" class="clickable-subdoel" data-target-id="rapportages-talent-{{ subdoel.id }}" aria-controls="rapportages-talent-{{ subdoel.id }}" aria-expanded="false">{{ subdoel.tekst }}</button>
+                                        <div id="rapportages-talent-{{ subdoel.id }}" class="rapportages" hidden>
+                                            {% if subdoel.rapportages %}
+                                                {% for rapportage in subdoel.rapportages %}
+                                                    <article class="rapportage">
+                                                        <p>{{ rapportage.tekst }}</p>
+                                                        {% if rapportage.begeleider %}
+                                                            <p><strong>Begeleider:</strong>{{ rapportage.begeleider }}</p>
+                                                        {% endif %}
+                                                        {% if rapportage.datum %}
+                                                            <p><strong>Datum:</strong>{{ rapportage.datum|date:"d-m-Y" }}</p>
+                                                        {% endif %}
+                                                    </article>
+                                                {% endfor %}
+                                            {% else %}
+                                                <p class="text-muted">Geen rapportages beschikbaar.</p>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                </section>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-muted">Geen subdoelen beschikbaar.</p>
+                        {% endif %}
+                    </div>
+                </article>
+            {% endfor %}
+        </section>
+    {% else %}
+        <div class="alert alert-info" role="status">Voor deze deelnemer zijn geen doelen gevonden.</div>
+    {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'core/js/deelnemer-doelen.js' %}" defer></script>
+{% endblock %}

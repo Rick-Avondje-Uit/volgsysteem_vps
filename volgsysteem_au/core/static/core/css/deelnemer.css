@@ -1,0 +1,39 @@
+.clickable-hoofddoel,
+.clickable-subdoel {
+    margin: 10px 0;
+    padding: 0.3em;
+    cursor: pointer;
+    background-color: var(--color-surface-subtle);
+    border-radius: var(--border-radius-small);
+    transition: background-color var(--transition-normal);
+}
+
+.clickable-hoofddoel:hover,
+.clickable-subdoel:hover {
+    background-color: var(--color-primary-light);
+}
+
+.subdoelen,
+.rapportages {
+    margin-left: 1em;
+}
+
+.rapportages {
+    margin-top: 12px;
+    padding-left: 20px;
+    border-left: 3px solid var(--color-border);
+}
+
+.rapportage {
+    margin: 12px 0;
+    font-size: var(--font-size-large);
+    line-height: 1.7;
+}
+
+.rapportage p {
+    margin: 6px 0;
+}
+
+.rapportage strong {
+    font-weight: 600;
+}

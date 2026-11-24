@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+<title>Organisaties</title>
+{% endblock %}
+
+{% block body_block %}
+<p>Geeft het aantal deelnemers weer per organisatie en verdere info. Als er geen verdere info bekend is wordt de tweede waarde leeg getoond. Iemand kan slechts in één categorie vallen</p>
+{{ data|safe}}
+<p>Gebruik onderstaande overzicht om te kijken welke deelnemers bij welke zorgorganisaties horen</p>
+{{ organisatie_per_deelnemer|safe}}
+{% endblock %}

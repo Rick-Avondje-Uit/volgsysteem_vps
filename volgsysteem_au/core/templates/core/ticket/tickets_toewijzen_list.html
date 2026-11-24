@@ -1,0 +1,135 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block main_title %}
+    <title>Tickets toewijzen</title>
+{% endblock %}
+
+{% block body_block %}
+    <div class="container-fluid">
+        <h1 class="mb-4">Tickets toewijzen</h1>
+
+        {% if geen_tickets %}
+            <div class="alert alert-info" role="alert">
+                Er zijn geen tickets die nog moeten worden toegewezen.
+            </div>
+        {% else %}
+            <form
+                method="post"
+                action="{% url 'core:tickets_toewijzen' %}"
+                novalidate
+            >
+                {% csrf_token %}
+                {{ formset.management_form }}
+
+                {% if formset.non_form_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in formset.non_form_errors %}
+                            <div>{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover align-middle js-sort-table">
+                        <thead>
+                            <tr>
+                                <th class="js-sort-default">Activiteit</th>
+                                <th class="js-sort-date">Datum activiteit</th>
+                                <th class="js-sort-default">Deelnemer op ticket</th>
+                                <th class="js-sort-default">Deelnemer</th>
+                                <th class="js-sort-none">Toewijzen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ticket_form in formset %}
+                                <tr>
+                                    <td>
+                                        {# Nodig om het bestaande ticket te identificeren #}
+                                        {{ ticket_form.ticket_id }}
+                                        {{ ticket_form.activiteit_naam }}
+                                        {% for error in ticket_form.activiteit_naam.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        {{ ticket_form.activiteit_datum }}
+                                        {% for error in ticket_form.activiteit_datum.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        {{ ticket_form.deelnemer_naam_ticket }}
+                                        {% for error in ticket_form.deelnemer_naam_ticket.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        {{ ticket_form.deelnemer }}
+                                        {% for error in ticket_form.deelnemer.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            {{ ticket_form.importeren }}
+                                            <label class="form-check-label" for="{{ ticket_form.importeren.id_for_label }}">Toewijzen</label>
+                                        </div>
+                                        {% for error in ticket_form.importeren.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                {% if ticket_form.ticket_id.errors %}
+                                    <tr>
+                                        <td colspan="5">
+                                            <div class="alert alert-danger mb-0" role="alert">
+                                                {% for error in ticket_form.ticket_id.errors %}
+                                                    {{ error }}
+                                                {% endfor %}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% if ticket_form.non_field_errors %}
+                                    <tr>
+                                        <td colspan="5">
+                                            <div class="alert alert-danger mb-0" role="alert">
+                                                {% for error in ticket_form.non_field_errors %}
+                                                    {{ error }}
+                                                {% endfor %}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-end mt-3">
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Tickets toewijzen
+                    </button>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'core/js/sort-table.js' %}" defer></script>
+{% endblock %}

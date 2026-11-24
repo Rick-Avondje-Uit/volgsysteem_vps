@@ -1,0 +1,31 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Instellingen</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Instellingen</h1>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Instelling</th>
+                    <th>Tijdsduur</th>
+                    <th>Tijdsperiode</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for instelling in instellingen_list %}
+                    <tr>
+                        <td><a href="{% url 'core:instellingen_detail' instelling.id %}">{{ instelling.naam }}</a></td>
+                        <td contenteditable="true">{{ instelling.tijdsduur }}</td>
+                        <td contenteditable="true">{{ instelling.get_tijdsperiode_display }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+{% endblock %}

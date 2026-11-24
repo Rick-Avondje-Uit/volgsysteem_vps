@@ -1,0 +1,344 @@
+/*
+ * Avondje Uit Volgsysteem
+ * Tabellen en tabelinteractie
+ */
+
+
+/* =========================================================
+   Tabelcontainer
+   ========================================================= */
+
+.table-responsive {
+    width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+
+    box-shadow: var(--shadow-small);
+
+    -webkit-overflow-scrolling: touch;
+}
+
+/* =========================================================
+   Basistabel
+   ========================================================= */
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+
+    color: var(--color-text);
+    background: var(--color-surface);
+
+    border-collapse: collapse;
+}
+
+.table caption {
+    padding: 12px 15px;
+
+    color: var(--color-text-muted);
+
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    text-align: left;
+}
+
+.table > thead > tr > th {
+    padding: 13px 15px;
+
+    vertical-align: middle;
+    text-align: left;
+    white-space: nowrap;
+
+    color: var(--color-primary-dark);
+    background: var(--color-primary-light);
+
+    border-top: 0;
+    border-bottom: 2px solid var(--color-primary);
+
+    font-size: var(--font-size-small);
+    font-weight: 700;
+}
+
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    padding: 13px 15px;
+
+    vertical-align: middle;
+
+    border-top: 1px solid var(--color-border);
+}
+
+.table > tbody > tr:first-child > td {
+    border-top: 0;
+}
+
+.table > tfoot > tr > td {
+    color: var(--color-primary-dark);
+    background: #fafafa;
+
+    border-top: 2px solid var(--color-border);
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   Hover en gestreepte tabel
+   ========================================================= */
+
+.table-hover > tbody > tr {
+    transition: background-color var(--transition-fast);
+}
+
+.table-hover > tbody > tr:hover {
+    background: #faf9fc;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background: #fbfbfc;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd):hover {
+    background: var(--color-primary-light);
+}
+
+
+/* =========================================================
+   Tabelranden
+   ========================================================= */
+
+.table-bordered {
+    border: 0;
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+    border-color: var(--color-border);
+}
+
+
+/* =========================================================
+   Compacte tabel
+   ========================================================= */
+
+.table--compact > thead > tr > th,
+.table--compact > tbody > tr > td {
+    padding: 8px 10px;
+}
+
+
+/* =========================================================
+   Tabelstatussen
+   ========================================================= */
+
+/* Bestaande projectclasses */
+
+.table > tbody > tr.rode-rij > td,
+.rode-rij {
+    color: #c90000;
+}
+
+.rode-datum {
+    color: #c90000;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   Sorteerbare kolommen
+   ========================================================= */
+
+.table th.sortable,
+.table th[data-sort] {
+    position: relative;
+
+    padding-right: 34px;
+
+    cursor: pointer;
+    user-select: none;
+}
+
+.table th.sortable:hover,
+.table th[data-sort]:hover {
+    background: #e3daf2;
+}
+
+.table th.sortable::after,
+.table th[data-sort]::after {
+    position: absolute;
+    top: 50%;
+    right: 13px;
+
+    color: var(--color-text-muted);
+
+    content: "\2195";
+
+    font-size: 13px;
+
+    transform: translateY(-50%);
+}
+
+.table th.sortable.sort-asc::after,
+.table th[data-sort].sort-asc::after {
+    color: var(--color-primary-dark);
+
+    content: "\2191";
+}
+
+.table th.sortable.sort-desc::after,
+.table th[data-sort].sort-desc::after {
+    color: var(--color-primary-dark);
+
+    content: "\2193";
+}
+
+.js-sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.js-sortable::after {
+    margin-left: 6px;
+    color: var(--color-text-muted);
+    font-size: 0.7em;
+}
+
+.js-sortable[aria-sort="ascending"]::after {
+    content: "▲";
+}
+
+.js-sortable[aria-sort="descending"]::after {
+    content: "▼";
+}
+
+.js-sortable:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   Tabelacties
+   ========================================================= */
+
+.table-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    gap: 6px;
+}
+
+.table-actions .btn {
+    min-height: 34px;
+    padding: 6px 10px;
+
+    font-size: var(--font-size-small);
+}
+
+.table-actions--right {
+    justify-content: flex-end;
+}
+
+
+/* =========================================================
+   Lege tabel
+   ========================================================= */
+
+.table-empty {
+    padding: 32px 20px !important;
+
+    color: var(--color-text-muted);
+
+    text-align: center;
+}
+
+/* =========================================================
+   Selecteerbare tabelrijen
+   ========================================================= */
+
+.table-selectable > tbody > tr {
+    cursor: pointer;
+}
+
+.table-selectable > tbody > tr.is-selected,
+.table-selectable > tbody > tr[aria-selected="true"] {
+    background: var(--color-primary-light);
+}
+
+.table-selectable > tbody > tr.is-selected > td,
+.table-selectable > tbody > tr[aria-selected="true"] > td {
+    border-color: #d6cbe8;
+}
+
+
+/* =========================================================
+   Vaste breedtes en uitlijning
+   ========================================================= */
+
+.table .column-small {
+    width: 1%;
+
+    white-space: nowrap;
+}
+
+.table .column-actions {
+    width: 1%;
+
+    text-align: right;
+    white-space: nowrap;
+}
+
+.table .column-date {
+    width: 130px;
+
+    white-space: nowrap;
+}
+
+.table .column-email {
+    min-width: 220px;
+}
+
+/* =========================================================
+   Responsieve tabellen
+   ========================================================= */
+
+@media (max-width: 768px) {
+    .table-responsive {
+        margin-bottom: 18px;
+        border-radius: var(--border-radius-small);
+    }
+
+    .table > thead > tr > th,
+    .table > tbody > tr > td,
+    .table > tfoot > tr > td {
+        padding: 11px 12px;
+    }
+
+    .table-actions {
+        min-width: 130px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .table > thead > tr > th {
+        font-size: 13px;
+    }
+
+    .table > tbody > tr > td {
+        font-size: 14px;
+    }
+}

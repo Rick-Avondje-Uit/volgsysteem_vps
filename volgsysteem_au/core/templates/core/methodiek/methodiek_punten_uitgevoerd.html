@@ -1,0 +1,19 @@
+{% extends "core/base.html" %}
+
+{% block body_block %}
+    <h2>Heb je de actie {{ object.get_eerst_volgende_actie_display}} van {{ object.deelnemer.naam }} uitgevoerd?</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% if object.eerst_volgende_actie >= 5 and object.eerst_volgende_actie <= 6 %}
+            <p>Wilt u het traject afsluiten?, vink niet aan om te verlengen</p>
+            <div class="form-check mb-3">
+                <input id='afronden' name="afronden" type="checkbox" value="Afronden" class="form-check-input">
+                <label for="afronden" class="form-check-label">Ja traject afsluiten</label>
+            </div>
+        {% endif %}
+        <div class="action-bar">
+            <button type="submit" class="btn btn-primary">Actie als uitgevoerd markeren</button>
+            <a href="{% url 'core:methodiek_list' %}" class="btn btn-secondary">Annuleren</a>
+        </div>
+    </form>
+{% endblock %}

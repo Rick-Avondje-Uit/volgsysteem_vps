@@ -1,0 +1,319 @@
+{% load group_tags %}
+
+<header class="site-header">
+    <div class="container site-header__container">
+
+        {# Logo / applicatienaam #}
+        <a href="{% url 'core:index' %}" class="site-brand" aria-label="Avondje Uit Volgsysteem, naar de beginpagina">
+            <span class="site-brand__name">Avondje Uit</span>
+            <span class="site-brand__subtitle">Volgsysteem</span>
+        </a>
+
+        {% if user.is_authenticated %}
+
+            {# Ingelogde gebruiker #}
+            <div class="site-header__user">
+                <span class="site-header__user-label">Ingelogd als</span>
+
+                <strong>
+                    {{ user.get_full_name|default:user.username }}
+                </strong>
+            </div>
+
+            {# Mobiele menuknop #}
+            <button type="button" class="mobile-menu-button" aria-label="Navigatiemenu openen" aria-controls="main-navigation" aria-expanded="false" data-menu-button>
+                <span class="mobile-menu-button__icon" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+
+        {% endif %}
+
+    </div>
+</header>
+
+{% if user.is_authenticated %}
+
+    <nav id="main-navigation" class="main-navigation" aria-label="Hoofdnavigatie" data-main-navigation>
+        <div class="container">
+
+            {% if user|in_group:"Begeleider" or user.is_staff %}
+
+                {# ========================================================= #}
+                {# Navigatie voor begeleiders en medewerkers                #}
+                {# ========================================================= #}
+
+                <ul id="menu" class="navigation-menu">
+
+                    {# Activiteiten #}
+                    <li class="navigation-menu__item navigation-menu__item--dropdown">
+
+                        <button type="button" class="navigation-menu__toggle" aria-expanded="false" aria-controls="activities-submenu" data-submenu-toggle>
+                            <span>Activiteiten</span>
+
+                            <span class="navigation-menu__chevron" aria-hidden="true"></span>
+                        </button>
+
+                        <ul id="activities-submenu" class="navigation-submenu" hidden>
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:activiteit_list' %}" class="navigation-submenu__link">Alle activiteiten</a>
+                            </li>
+
+                            {% if activiteit %}
+                                <li class="navigation-submenu__item">
+                                    <a href="{% url 'core:activiteit_delete' activiteit.id %}" class="navigation-submenu__link">Activiteit verwijderen</a>
+                                </li>
+                            {% else %}
+                                <li class="navigation-submenu__item">
+                                    <span class="navigation-submenu__link navigation-submenu__link--disabled" aria-disabled="true">Activiteit verwijderen</span>
+                                </li>
+                            {% endif %}
+
+                        </ul>
+
+                    </li>
+
+                    {# Deelnemers #}
+                    <li class="navigation-menu__item navigation-menu__item--dropdown">
+
+                        <button type="button" class="navigation-menu__toggle" aria-expanded="false" aria-controls="participants-submenu" data-submenu-toggle>
+                            <span>Deelnemers</span>
+
+                            <span class="navigation-menu__chevron" aria-hidden="true"></span>
+                        </button>
+
+                        <ul id="participants-submenu" class="navigation-submenu" hidden>
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:deelnemer_zoek' %}" class="navigation-submenu__link">Deelnemer zoeken</a>
+                            </li>
+
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:deelnemer_list' %}" class="navigation-submenu__link">Deelnemeroverzicht</a>
+                            </li>
+
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:deelnemer_meedoen_regeling' %}" class="navigation-submenu__link">Meedoenregeling</a>
+                            </li>
+
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:methodiek_list' %}" class="navigation-submenu__link">Methodiek</a>
+                            </li>
+
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:deelnemer_volgsysteem_list' %}" class="navigation-submenu__link">Volgsysteem</a>
+                            </li>
+
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:deelnemer_add' %}" class="navigation-submenu__link">Deelnemer toevoegen</a>
+                            </li>
+
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:deelnemer_email_lijst' %}" class="navigation-submenu__link">E-mailadressen deelnemers</a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    {# Organisaties #}
+                    <li class="navigation-menu__item">
+                        <a href="{% url 'core:organisatie_list' %}" class="navigation-menu__link">Organisaties</a>
+                    </li>
+
+                    {# Tickets #}
+                    <li class="navigation-menu__item navigation-menu__item--dropdown">
+
+                        <button type="button" class="navigation-menu__toggle" aria-expanded="false" aria-controls="tickets-submenu" data-submenu-toggle>
+                            <span>Tickets</span>
+
+                            <span class="navigation-menu__chevron" aria-hidden="true"></span>
+                        </button>
+
+                        <ul id="tickets-submenu" class="navigation-submenu" hidden>
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:ticket_list' %}" class="navigation-submenu__link">Alle tickets</a>
+                            </li>
+
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:tickets_toewijzen' %}" class="navigation-submenu__link">Tickets toewijzen</a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    {# Vragenlijsten #}
+                    <li class="navigation-menu__item navigation-menu__item--dropdown">
+
+                        <button type="button" class="navigation-menu__toggle" aria-expanded="false" aria-controls="surveys-submenu" data-submenu-toggle>
+                            <span>Vragenlijsten</span>
+
+                            <span class="navigation-menu__chevron" aria-hidden="true"></span>
+                        </button>
+
+                        <ul id="surveys-submenu" class="navigation-submenu" hidden>
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'survey-list' %}" class="navigation-submenu__link">Vragenlijst invullen</a>
+                            </li>
+
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:resultaten_vragenlijst_ingevuld' %}" class="navigation-submenu__link">Ingevulde vragenlijsten</a>
+                            </li>
+
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:resultaten_vragenlijst_list' %}" class="navigation-submenu__link">Resultaten</a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    {# Overig #}
+                    <li class="navigation-menu__item navigation-menu__item--dropdown">
+
+                        <button type="button" class="navigation-menu__toggle" aria-expanded="false" aria-controls="other-submenu" data-submenu-toggle>
+                            <span>Overig</span>
+
+                            <span class="navigation-menu__chevron" aria-hidden="true"></span>
+                        </button>
+
+                        <ul id="other-submenu" class="navigation-submenu" hidden>
+
+                            {# Django-beheer #}
+                            {% if user.is_staff %}
+                                <li class="navigation-submenu__item">
+                                    <a href="{% url 'admin:index' %}" class="navigation-submenu__link">Adminpagina</a>
+                                </li>
+                            {% endif %}
+
+                            {# Begeleiders: genest submenu #}
+                            <li class="navigation-submenu__item">
+
+                                <button type="button" class="navigation-submenu__toggle" aria-expanded="false" aria-controls="supervisors-submenu" data-submenu-toggle>
+                                    <span>Begeleiders</span>
+
+                                    <span class="navigation-menu__chevron" aria-hidden="true"></span>
+                                </button>
+
+                                <ul id="supervisors-submenu" class="navigation-submenu" hidden>
+
+                                    <li class="navigation-submenu__item">
+                                        <a href="{% url 'core:create_begeleider' %}" class="navigation-submenu__link">Begeleideraccount aanmaken</a>
+                                    </li>
+
+                                    <li class="navigation-submenu__item">
+                                        <a href="{% url 'core:begeleider_list' %}" class="navigation-submenu__link">Begeleiderlijst</a>
+                                    </li>
+
+                                    <li class="navigation-submenu__item">
+                                        <a href="{% url 'core:begeleider_add' %}" class="navigation-submenu__link">Begeleider toevoegen</a>
+                                    </li>
+
+                                    {% if begeleider %}
+                                        <li class="navigation-submenu__item">
+                                            <a href="{% url 'core:begeleider_delete' begeleider.id %}" class="navigation-submenu__link">Begeleider verwijderen</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="navigation-submenu__item">
+                                            <span class="navigation-submenu__link navigation-submenu__link--disabled" aria-disabled="true">
+                                                Begeleider verwijderen
+                                            </span>
+                                        </li>
+                                    {% endif %}
+
+                                </ul>
+                            </li>
+
+                            {# Instellingen #}
+                            <li class="navigation-submenu__item">
+                                <a href="{% url 'core:instellingen' %}" class="navigation-submenu__link">Volgsysteeminstellingen</a>
+                            </li>
+
+                            {# Instroom: genest submenu #}
+                            <li class="navigation-submenu__item">
+
+                                <button type="button" class="navigation-submenu__toggle" aria-expanded="false" aria-controls="intake-submenu" data-submenu-toggle>
+                                    <span>Instroom</span>
+
+                                    <span class="navigation-menu__chevron" aria-hidden="true"></span>
+                                </button>
+
+                                <ul id="intake-submenu" class="navigation-submenu" hidden>
+                                    <li class="navigation-submenu__item">
+                                        <a href="{% url 'core:instroom_per_maand' %}" class="navigation-submenu__link">Instroom per maand</a>
+                                    </li>
+                                </ul>
+
+                            </li>
+
+                            {# Downloads: genest submenu #}
+                            <li class="navigation-submenu__item">
+
+                                <button type="button" class="navigation-submenu__toggle" aria-expanded="false" aria-controls="downloads-submenu" data-submenu-toggle>
+                                    <span>Downloads</span>
+
+                                    <span class="navigation-menu__chevron" aria-hidden="true"></span>
+                                </button>
+
+                                <ul id="downloads-submenu" class="navigation-submenu" hidden>
+                                    <li class="navigation-submenu__item">
+                                        <a href="{% url 'core:download_tickets' %}" class="navigation-submenu__link">Tickets downloaden</a>
+                                    </li>
+                                </ul>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                    {# Uitloggen #}
+                    <li class="navigation-menu__logout">
+                        <form action="{% url 'logout' %}" method="post" class="logout-form">
+                            {% csrf_token %}
+
+                            <button type="submit" class="logout-button">Uitloggen</button>
+                        </form>
+                    </li>
+
+                </ul>
+
+            {% else %}
+
+                {# ========================================================= #}
+                {# Navigatie voor overige ingelogde gebruikers              #}
+                {# ========================================================= #}
+
+                <ul id="menu" class="navigation-menu">
+
+                    <li class="navigation-menu__item">
+                        <a href="{% url 'core:index' %}" class="navigation-menu__link">Beginpagina</a>
+                    </li>
+
+                    <li class="navigation-menu__item">
+                        <a href="{% url 'core:eigen_doelen' %}" class="navigation-menu__link">Doelen</a>
+                    </li>
+
+                    <li class="navigation-menu__item">
+                        <a href="{% url 'core:eigen_rapportages' %}" class="navigation-menu__link">Rapportages</a>
+                    </li>
+
+                    <li class="navigation-menu__item">
+                        <a href="{% url 'survey-list' %}" class="navigation-menu__link">Vragenlijst</a>
+                    </li>
+
+                    <li class="navigation-menu__logout">
+                        <form action="{% url 'logout' %}" method="post" class="logout-form">
+                            {% csrf_token %}
+
+                            <button type="submit" class="logout-button">Uitloggen</button>
+                        </form>
+                    </li>
+
+                </ul>
+
+            {% endif %}
+
+        </div>
+    </nav>
+
+{% endif %}

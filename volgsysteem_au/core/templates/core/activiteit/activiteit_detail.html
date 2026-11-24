@@ -1,0 +1,49 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block main_title %}
+    <title>Activiteiten</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Activiteiten</h1>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle js-sort-table">
+            <thead>
+                <tr>
+                    <th class="js-sort-none">Naam</th>
+                    <th class="js-sort-none">Type ticket</th>
+                    <th class="js-sort-date">Gekocht op</th>
+                    <th class="js-sort-none">Bewerken</th>
+                    <th class="js-sort-none">Verwijderen</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for ticket in gekochte_tickets %}
+                    <tr>
+                        <td>
+                            {% if ticket.deelnemer.id %}
+                                <a href="{% url 'core:deelnemer_detail' ticket.deelnemer.id %}">{{ ticket.deelnemer.naam }}</a>
+                            {% else %}
+                                Anoniem
+                            {% endif %}
+                        </td>
+                        <td>{{ ticket.get_type_ticket_display }}</td>
+                        <td>{{ ticket.gekocht_op|date:"d-m-Y" }}</td>
+                        <td>
+                            <a href="{% url 'core:ticket_update_individual' ticket.id %}" class="btn btn-sm btn-secondary">Bewerken</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'core:ticket_delete' ticket.id %}" class="btn btn-sm btn-danger">Verwijderen</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'core/js/sort-table.js' %}" defer></script>
+{% endblock %}

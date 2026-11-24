@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>Verzend test email</title>
+</head>
+<body>
+    <p>Voer het e-mailadres in om een test email naar te verzenden.</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Verzenden</button>
+    </form>
+</body>
+</html>

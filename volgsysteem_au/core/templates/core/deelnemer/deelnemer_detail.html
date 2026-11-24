@@ -1,0 +1,94 @@
+{% extends "core/base.html" %}
+{% load group_tags %}
+{% load static %}
+{% block main_title %}
+    <title>Deelnemer</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{deelnemer}}</h1>
+    {% if deelnemer.belangrijke_info %}
+        <p>{{deelnemer.belangrijke_info}}</p>
+    {% endif %}
+    <br>
+    {% if user|in_group:"Begeleider" or user.is_staff %}
+        <h2><a href="{% url 'core:rapportage_list' deelnemer.id %}" >Rapportages</a></h2>
+    {% else %}
+        <h2><a href="{% url 'core:eigen_rapportages'  %}" >Rapportages</a></h2>
+    {% endif %}
+    {% if heeft_doelen %}
+        {% if user|in_group:"Begeleider" or user.is_staff %}
+            <h2><a href="{% url 'core:deelnemer_doelen_list' deelnemer.id %}">Doelen</a></h2>
+        {% else %}
+            <h2><a href="{% url 'core:eigen_doelen' %}">Doelen</a></h2>
+        {% endif %}
+    {% else %}
+        <h2>Er zijn nog geen doelen vastgelegd.</h2>
+        {% if user|in_group:"Begeleider" or user.is_staff %}
+            <h4>Wilt u een eerste doel <a href="{% url 'core:deelnemer_doelen_list' deelnemer.id %}">Toevoegen</a>?</h4>
+        {% endif %}
+    {% endif %}
+    <h2>hoofdlocatie: {{deelnemer.aanmeld_locatie}}</h2>
+    <h4>In totaal heeft {{deelnemer.voornaam}} {{totale_tickets}} tickets gekocht.</h4>
+    <h4>Eerste activiteit: {{ eerste_activiteit.activiteit }}</h4>
+    <ul>
+        {% for key, value in datums.items %}
+            {% if value == 1 %}
+                <li>Tot {{key}} dagen terug: 1 deelname. </li>
+            {% else %}
+                <li>Tot {{key}} dagen terug: {{value }} deelnames.</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% if laatste_activiteiten %}
+        <h2>Laatste activiteiten:</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Naam</th>
+                        <th>Plaats</th>
+                        <th>Type ticket</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in laatste_activiteiten %}
+                        <tr>
+                            <td>{{ ticket.activiteit.datum }}</td>
+                            <td>
+                                <a href="{% url 'core:activiteit_detail' ticket.activiteit.id %}">{{ ticket.activiteit.naam }}</a>
+                            </td>
+                            <td>{{ ticket.activiteit.plaats }}</td>
+                            <td>{{ ticket.get_type_ticket_display }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <h1>{{ deelnemer.naam }} heeft nog geen activiteiten bezocht</h1>
+    {% endif %}
+    <p>telefoon nummer: {{deelnemer.mobiele_nummer}}</p>
+    <p>email: {{deelnemer.email}}</p>
+    {% if deelnemer.zorgorganisatie %}
+        <p>Aangemeld via: {{deelnemer.zorgorganisatie}}</p>
+    {% else %}
+        <p>Geen zorgorganisatie bekend</p>
+    {% endif %}
+    <br>
+    {% if user|in_group:"Begeleider" or user.is_staff %}
+        <a href="{% url 'core:deelnemer_update' deelnemer.id %}" class="btn btn-primary">Persoonsgegevens bijwerken</a>
+        <a href="{% url 'core:deelnemer_update_instroom' deelnemer.id %}" class="btn btn-secondary">Instroomgegevens bijwerken</a>
+    {% else %}
+        <a href="{% url 'core:update_gegevens' %}" class="btn btn-primary">Update persoonsgegevens</a>
+    {% endif %}
+    <br>
+    {% if user|in_group:"Begeleider" or user.is_staff %}
+        {% if uitgestroomd %}
+            <a href="{% url 'core:deelnemer_delete_uitstroom' deelnemer.id %}" class="btn btn-primary">Deelnemer weer instromen</a>
+        {% else %}
+            <a href="{% url 'core:deelnemer_create_uitstroom' deelnemer.id %}" class="btn btn-danger">Deelnemer is uitgestroomd</a>
+        {% endif %}
+    {% endif %}
+{% endblock %}

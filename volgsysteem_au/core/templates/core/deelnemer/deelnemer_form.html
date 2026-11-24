@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block main_title %}
+    <title>Deelnemer</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Nieuwe Deelnemer</h1>
+    <form class="deelnemer-form" method="post" data-name-check-url="{% url 'core:check_deelnemer' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+            <div id="naamWarning" class="message message--warning" role="status" hidden>
+                Er bestaat al een deelnemer met deze naam.
+            </div>
+        <button type="submit" class="save btn btn-primary">Toevoegen</button>
+    </form>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'core/js/deelnemer-form.js' %}" defer></script>
+{% endblock %}

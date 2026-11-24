@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block body_block %}
+    <h1>Activiteit verwijderen</h1>
+    <p>Weet je zeker dat je '{{ object }}' wilt verwijderen?</p>
+    <div class="alert alert-danger" role="alert">Alle bijbehorende tickets worden door de actie ook verwijderd</div>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Verwijderen</button>
+        <a href="{% url 'core:activiteit_list' %}" class="btn btn-secondary">Annuleren</a>
+    </form>
+{% endblock %}

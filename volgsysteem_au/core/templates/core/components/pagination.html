@@ -1,0 +1,39 @@
+{% if page_obj.paginator.num_pages > 1 %}
+
+    <nav aria-label="Paginering">
+
+        <ul class="pagination justify-content-center">
+
+            {% if page_obj.has_previous %}
+
+                <li class="page-item">
+                    <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value|urlencode }}&{% endif %}{% endfor %}page=1" aria-label="Ga naar de eerste pagina">&laquo; Eerste</a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value|urlencode }}&{% endif %}{% endfor %}page={{ page_obj.previous_page_number }}" rel="prev">Vorige</a>
+                </li>
+
+            {% endif %}
+
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">{{ page_obj.number }}van{{ page_obj.paginator.num_pages }}</span>
+            </li>
+
+            {% if page_obj.has_next %}
+
+                <li class="page-item">
+                    <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value|urlencode }}&{% endif %}{% endfor %}page={{ page_obj.next_page_number }}" rel="next">Volgende</a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value|urlencode }}&{% endif %}{% endfor %}page={{ page_obj.paginator.num_pages }}" aria-label="Ga naar de laatste pagina">Laatste &raquo;</a>
+                </li>
+
+            {% endif %}
+
+        </ul>
+
+    </nav>
+
+{% endif %}

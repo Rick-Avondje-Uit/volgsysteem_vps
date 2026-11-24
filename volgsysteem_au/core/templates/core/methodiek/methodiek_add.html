@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block main_title %}
+    <title>Methodiek</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Deelnemer aan methodiek toevoegen</h1>
+    <form method="post" action="{% url 'core:methodiek_add' %}" id="methodiekForm" data-duplicate-check-url="{% url 'core:check_duplicates_methodiek' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div id="duplicateWarning" class="message message--warning" role="status" hidden>
+            Deze deelnemer doet al mee aan de methodiek.
+        </div>
+
+        <div class="action-bar">
+            <button type="submit" class="btn btn-primary">Opslaan</button>
+            <a href="{% url 'core:methodiek_list' %}" class="btn btn-secondary">Annuleren</a>
+        </div>
+    </form>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'core/js/methodiek-add.js' %}" defer></script>
+{% endblock %}

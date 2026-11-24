@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>instelling</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{instelling.naam}}</h1>
+    <table border="1">
+        <thead>
+            <th>Naam</th>
+            <th>Aantal</th>
+            <th>Dag/Week/Maand</th>
+        </thead>
+        {% for instelling in instellingen_list %}
+            <tbody>
+                <tr>
+                    <td><a href="{% url 'core:instellingen_detail' instelling.id %}">{{instelling.naam}}</a></td>
+                    <td>{{instelling.tijdsduur}}</td>
+                    <td>{{instelling.get_tijdsperiode_display}}</td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,92 @@
+/* =========================================================
+   Vragenlijstresultaten
+   ========================================================= */
+
+.vragenlijst-resultaten {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.vragenlijst-resultaten__categorie {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.vragenlijst-resultaten__categorie h2 {
+    margin-bottom: 8px;
+}
+
+.vragenlijst-resultaten table th:first-child,
+.vragenlijst-resultaten table td:first-child {
+    width: 300px;
+}
+
+.vragenlijst-resultaten table th:not(:first-child),
+.vragenlijst-resultaten table td:not(:first-child) {
+    width: 150px;
+}
+
+
+/* Tekstantwoorden */
+
+.vragenlijst-tekstreactie {
+    position: relative;
+    cursor: help;
+}
+
+.vragenlijst-tekstreactie__label {
+    font-weight: 600;
+}
+
+.vragenlijst-tekstreactie__content {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 0;
+    z-index: 10;
+
+    display: none;
+
+    min-width: 250px;
+    max-width: 400px;
+    padding: 10px 12px;
+
+    color: var(--color-text);
+    white-space: pre-line;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-small);
+    box-shadow: var(--shadow-small);
+}
+
+.vragenlijst-tekstreactie:hover
+.vragenlijst-tekstreactie__content,
+.vragenlijst-tekstreactie:focus-within
+.vragenlijst-tekstreactie__content {
+    display: block;
+}
+
+
+/* Antwoordscores */
+
+.vragenlijst-score--nooit {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+.vragenlijst-score--bijna-nooit {
+    background-color: rgba(191, 64, 0, 0.3);
+}
+
+.vragenlijst-score--soms {
+    background-color: rgba(127, 127, 0, 0.3);
+}
+
+.vragenlijst-score--bijna-altijd {
+    background-color: rgba(64, 191, 0, 0.3);
+}
+
+.vragenlijst-score--altijd {
+    background-color: rgba(0, 255, 0, 0.5);
+}

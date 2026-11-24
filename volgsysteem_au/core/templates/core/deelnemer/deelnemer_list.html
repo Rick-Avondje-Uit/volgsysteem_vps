@@ -1,0 +1,98 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block main_title %}
+    <title>Deelnemers</title>
+{% endblock main_title %}
+
+
+{% block body_block %}
+    <h1>Deelnemers</h1>
+    <form id="filterForm" method="get" action="{% url 'core:deelnemer_list' %}" class="mb-4">
+        {{ form }}
+        {% if huidige_sort %}
+            <input type="hidden" name="sort" value="{{ huidige_sort }}">
+        {% endif %}
+        <div class="row g-3 align-items-end mt-1">
+            <div class="col-md-4">
+                <label for="woonplaats_zoek" class="form-label">Zoek op woonplaats</label>
+                <input type="search" id="woonplaats_zoek" name="woonplaats_zoek" value="{{ huidige_woonplaats_zoekterm }}" placeholder="Typ een woonplaats..." autocomplete="off" class="form-control">
+            </div>
+
+            {% if huidige_woonplaats_zoekterm or huidige_sort %}
+                <div class="col-auto">
+                    <a href="{% url 'core:deelnemer_list' %}" class="btn btn-secondary">Filters wissen</a>
+                </div>
+            {% endif %}
+
+        </div>
+    </form>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle js-sort-table">
+            <thead>
+                <tr>
+                    {# Naam wordt server-side gesorteerd #}
+                    <th class="js-sort-none">
+                        {% if huidige_sort == "naam" %}
+                            <a href="?woonplaats_zoek={{ huidige_woonplaats_zoekterm|urlencode }}&sort=-naam">Naam</a>
+                        {% else %}
+                            <a href="?woonplaats_zoek={{ huidige_woonplaats_zoekterm|urlencode }}&sort=naam">Naam</a>
+                        {% endif %}
+                    </th>
+                    <th class="js-sort-none">Actieve deelnemer</th>
+                    <th class="js-sort-none">In methodiek</th>
+                    <th class="js-sort-number">Aantal tickets gekocht</th>
+                    {# Woonplaats wordt server-side gesorteerd #}
+                    <th class="js-sort-none">
+                        {% if huidige_sort == "woonplaats" %}
+                            <a href="?woonplaats_zoek={{ huidige_woonplaats_zoekterm|urlencode }}&sort=-woonplaats">Woonplaats</a>
+                        {% else %}
+                            <a href="?woonplaats_zoek={{ huidige_woonplaats_zoekterm|urlencode }}&sort=woonplaats">Woonplaats</a>
+                        {% endif %}
+                    </th>
+                    <th>Locatie</th>
+                    <th class="js-sort-none">Methodiek doelen</th>
+                    <th class="js-sort-none">Talent doelen</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for deelnemer in deelnemers %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'core:deelnemer_detail' deelnemer.id %}">{{ deelnemer.naam }}</a>
+                        </td>
+                        <td>{{ deelnemer.actief }}</td>
+                        <td>{{ deelnemer.in_methodiek }}</td>
+                        <td>{{ deelnemer.aantal_tickets }}</td>
+                        <td>{{ deelnemer.woonplaats }}</td>
+                        <td>{{ deelnemer.aanmeld_locatie }}</td>
+                        <td>
+                            {% if deelnemer.heeft_methodiek_doel %}
+                                <a href="{% url 'core:deelnemer_doelen_list' deelnemer.id %}">Doelen</a>
+                            {% else %}
+                                <span class="text-muted">Geen</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if deelnemer.heeft_talent_doel %}
+                                <a href="{% url 'core:deelnemer_doelen_list' deelnemer.id %}">Doelen</a>
+                            {% else %}
+                                <span class="text-muted">Geen</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center">Geen deelnemers gevonden met deze filters.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include "core/components/pagination.html" %}
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'core/js/deelnemer-list.js' %}" defer></script>
+    <script src="{% static 'core/js/sort-table' %}" defer></script>
+{% endblock %}

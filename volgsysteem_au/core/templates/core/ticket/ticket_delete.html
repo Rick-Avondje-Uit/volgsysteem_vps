@@ -1,0 +1,17 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Ticket verwijderen</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Ticket verwijderen</h1>
+    <p>Weet je zeker dat je<strong>{{ object }}</strong>wilt verwijderen?</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="action-bar">
+            <button type="submit" class="btn btn-danger">Verwijderen</button>
+            <a href="{% url 'core:activiteit_detail' activiteit_id %}" class="btn btn-secondary">Annuleren</a>
+        </div>
+    </form>
+{% endblock %}

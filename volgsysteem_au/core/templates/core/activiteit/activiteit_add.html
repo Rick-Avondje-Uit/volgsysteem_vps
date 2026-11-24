@@ -1,0 +1,51 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Activiteit toevoegen</title>
+{% endblock %}
+
+{% block body_block %}
+
+    <h1>Activiteit toevoegen</h1>
+
+    <form method="post" action="{% url 'core:activiteit_add' %}">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        <input type="hidden" name="start_date" value="{{ start_date }}">
+        <input type="hidden" name="end_date" value="{{ end_date }}">
+        <div class="table table-striped table-hover align-middle">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Naam</th>
+                            <th>Plaats</th>
+                            <th>Datum</th>
+                            <th>Type activiteit</th>
+                            <th>Importeren</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for form in formset.forms %}
+                            <tr>
+                                <td>{{form.naam}}</td>
+                                <td>{{form.plaats}}</td>
+                                <td>{{form.datum}}</td>
+                                <td>{{form.type_activiteit}}</td>
+                                <td>{{form.importeren}}</td>
+                                {{form.guid.as_hidden}}
+                                {{form.begin_datum.as_hidden}}
+                                {{form.eind_datum.as_hidden}}
+                                {{form.bedrag.as_hidden}}
+
+
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        <div class="action-bar">
+            <button type="submit" class="btn btn-primary">Opslaan</button>
+        </div>
+    </form>
+{% endblock %}

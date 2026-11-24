@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Rapportage</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Voeg rapportage toe</h1>
+    <form method="post" action="{% url 'core:rapportage_add' deelnemer_id %}">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit">Opslaan</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Vragenlijsten</title>
+{% endblock main_title %}
+
+
+
+{% block body_block %}
+    <h1>Ingevulde vragenlijsten</h1>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Ingevulde naam</th>
+                    <th>Deelnemer toegekend</th>
+                    <th>Datum ingevuld</th>
+                    <th>Toekennen</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lijst in deelnemers_met_naam %}
+                    <tr>
+                        <td>{{ lijst.0 }}</td>
+                        <td>{{ lijst.1 }}</td>
+                        <td>{{ lijst.2|date:"Y-m-d" }}</td>
+                        <td>
+                            <a href="{% url 'core:resultaten_vragenlijst_toekennen' lijst.3 %}" class="btn btn-sm btn-secondary">Aanpassen</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">Geen ingevulde vragenlijsten gevonden.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

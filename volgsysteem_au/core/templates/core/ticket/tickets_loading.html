@@ -1,0 +1,17 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block main_title %}
+    <title>Tickets laden</title>
+{% endblock %}
+
+{% block body_block %}
+    <section class="loading-status" aria-labelledby="loading-status-title">
+        <h1 id="loading-status-title">Tickets laden</h1>
+        <div id="report-status" class="loading-status__message" role="status" aria-live="polite" data-status-url="{% url 'core:check_status' %}" data-continue-url="{% url 'core:import_tickets' %}">Tickets aan het laden, een ogenblik geduld.</div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'core/js/tickets-loading.js' %}" defer></script>
+{% endblock %}

@@ -1,0 +1,167 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Methodiek acties</title>
+{% endblock %}
+
+{% block body_block %}
+    <h2>Actiepunten {{naam}}</h2>
+    <h3>Begeleider: {{begeleider}}</h3>
+    {% if pause %}
+        <h3>Huidige status: gepauzeerd</h3>
+    {% else %}
+        <h3>Huidige status: {{status}}</h3>
+    {% endif %}
+    <div class="action-bar">
+        <a href="{% url 'core:methodiek_update' id %}" class="btn btn-primary">Bijwerken</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Actie</th>
+                    <th>Datum</th>
+                    <th>Gepland/uitgevoerd</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>datum eerste vragenlijst invullen</td>
+                    {% if methodiek.datum_vragenlijst_invullen %}
+                        <td>{{methodiek.datum_vragenlijst_invullen|date:'Y-m-d'}}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                    {% if methodiek.eerst_volgende_actie >= 0 %}
+                        {% if methodiek.eerst_volgende_actie == 0 %}
+                            <td>Gepland</td>
+                        {% else %}
+                            <td>Uitgevoerd</td>
+                        {% endif %}
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Begin gesprek</td>
+                    {% if methodiek.begin_gesprek %}
+                        <td>{{methodiek.begin_gesprek|date:'Y-m-d'}}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                    {% if methodiek.eerst_volgende_actie >= 1 %}
+                        {% if methodiek.eerst_volgende_actie == 1 %}
+                            <td>Gepland</td>
+                        {% else %}
+                            <td>Uitgevoerd</td>
+                        {% endif %}
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Drie maanden evaluatie</td>
+                    {% if methodiek.drie_maanden_evaluatie %}
+                        <td>{{methodiek.drie_maanden_evaluatie|date:'Y-m-d'}}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                    {% if methodiek.eerst_volgende_actie >= 2 %}
+                        {% if methodiek.eerst_volgende_actie == 2 %}
+                            <td>Gepland</td>
+                        {% else %}
+                            <td>Uitgevoerd</td>
+                        {% endif %}
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Zes maanden evaluatie</td>
+                        {% if methodiek.zes_maanden_evaluatie %}
+                            <td>{{methodiek.zes_maanden_evaluatie|date:'Y-m-d'}}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                    {% if methodiek.eerst_volgende_actie >= 3 %}
+                        {% if methodiek.eerst_volgende_actie == 3 %}
+                            <td>Gepland</td>
+                        {% else %}
+                            <td>Uitgevoerd</td>
+                        {% endif %}
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Negen maanden evaluatie</td>
+                    {% if methodiek.negen_maanden_evaluatie %}
+                        <td>{{methodiek.negen_maanden_evaluatie|date:'Y-m-d'}}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                    {% if methodiek.eerst_volgende_actie >= 4 %}
+                        {% if methodiek.eerst_volgende_actie == 4 %}
+                            <td>Gepland</td>
+                        {% else %}
+                            <td>Uitgevoerd</td>
+                           {% endif %}
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Jaar evaluatie</td>
+                    {% if methodiek.jaar_evaluatie %}
+                        <td>{{methodiek.jaar_evaluatie|date:'Y-m-d'}}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                    {% if methodiek.eerst_volgende_actie >= 5 %}
+                        {% if methodiek.eerst_volgende_actie == 5 %}
+                            <td>Gepland</td>
+                        {% else %}
+                            <td>Uitgevoerd</td>
+                        {% endif %}
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Verlenging 1</td>
+                    {% if methodiek.verlengings_gesprek_1 %}
+                        <td>{{methodiek.verlengings_gesprek_1|date:'Y-m-d'}}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                    {% if methodiek.eerst_volgende_actie >= 6 %}
+                        {% if methodiek.eerst_volgende_actie == 6%}
+                            <td>Gepland</td>
+                        {% else %}
+                            <td>Uitgevoerd</td>
+                        {% endif %}
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Verlenging 2</td>
+                    {% if methodiek.verlengings_gesprek_2 %}
+                        <td>{{methodiek.verlengings_gesprek_2|date:'Y-m-d'}}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                    {% if methodiek.eerst_volgende_actie >= 7 %}
+                        {% if methodiek.eerst_volgende_actie == 7 %}
+                            <td>Gepland</td>
+                        {% else %}
+                            <td>Uitgevoerd</td>
+                        {% endif %}
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

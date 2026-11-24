@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>Gebruiker aanmaken</title>
+</head>
+<body>
+    <p>Voer het e-mailadres van de begeleider in, deze krijgt een mail om het wachtwoord in te stellen.
+        <br><b>Let op, gebruik deze link niet voor deelnemers!</b>
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Verzenden</button>
+    </form>
+</body>
+</html>

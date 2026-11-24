@@ -1,0 +1,10 @@
+{% extends "core/base.html" %}
+
+{% block body_block %}
+    <h2>Weet je zeker dat je '{{ object }}' wilt verwijderen? De bijbehorende subdoelen en rapportages gaan dan ook verloren. Deze actie kan niet ongedaan gemaakt worden.</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Verwijderen">
+        <a href="{% url 'core:deelnemer_detail' object.deelnemer %}" class="btn btn-secondary">Annuleren</a>
+    </form>
+{% endblock %}

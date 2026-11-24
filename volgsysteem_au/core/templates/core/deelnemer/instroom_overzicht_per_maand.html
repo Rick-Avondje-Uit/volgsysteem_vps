@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Instroom cijfers</title>
+{% endblock %}
+
+{% block body_block %}
+    <p>Let op, instroom geeft niet de intakes weer van mensen die geanonimiseerd zijn of waarvan de instroomdatum niet bekend is. <br>
+        Zodra iemand verwijderd wordt verdwijnt die ook uit dit overzicht, oftwel alleen de deelnemers die op dit moment hier in staan worden getoond. <br>
+        Aan te raden is het zo te maken dat intake altijd blijft staan, ook al gaat deelnemer later weer weg.</p>
+    {{ data|safe}}
+{% endblock %}

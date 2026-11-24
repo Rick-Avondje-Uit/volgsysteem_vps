@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+
+{% block body_block %}
+    <h1>Begeleider verwijderen</h1>
+    <p>Weet je zeker dat je '{{ object }}' wilt verwijderen?</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="action-bar">
+            <button type="submit" class="btn btn-danger">Verwijderen</button>
+            <a href="{% url 'core:begeleider_list' %}" class="btn btn-secondary">Annuleren</a>
+        </div>
+    </form>
+{% endblock %}

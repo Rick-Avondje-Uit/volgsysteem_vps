@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Tickets Downloaden</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Tickets downloaden</h1>
+
+    <div class="alert alert-info" role="alert">Houd Ctrl ingedrukt tijdens het selecteren om meerdere plaatsen en/of typen activiteiten te selecteren.</div>
+    <form method="post" action="{% url 'core:download_tickets' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="action-bar">
+            <button type="submit" class="btn btn-primary">Downloaden</button>
+        </div>
+    </form>
+{% endblock %}

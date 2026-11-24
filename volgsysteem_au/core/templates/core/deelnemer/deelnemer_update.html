@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Deelnemer</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{ deelnemer.naam }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="action-bar">
+            <button type="submit" class="btn btn-primary">Opslaan</button>
+            <a href="{% url 'core:deelnemer_detail' deelnemer.id %}" class="btn btn-secondary">Annuleren</a>
+        </div>
+    </form>
+{% endblock %}

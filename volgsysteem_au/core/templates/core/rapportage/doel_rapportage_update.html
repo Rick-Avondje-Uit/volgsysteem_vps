@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Rapportage bewerken</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Bewerk rapportage</h1>
+    <form method="post" action="{% url 'core:doel_rapportage_update' object.id %}">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit">Opslaan</button>
+    </form>
+    <p>Wilt u deze rapportage liever <a href="{% url 'core:doel_rapportage_delete' object.id %}">verwijderen</a>?</p>
+{% endblock %}

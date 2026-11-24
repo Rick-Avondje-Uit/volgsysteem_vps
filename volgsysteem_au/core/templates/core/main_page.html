@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+<title>Deelnemers</title>
+{% endblock %}
+
+{% block body_block %}
+{% load group_tags %}
+{% if user.is_authenticated %}
+    {% if user|in_group:"Begeleider" or user.is_staff %}
+        <h1>Welkom {{ user.username }}</h1>
+    {% else %}
+        {% include 'core/deelnemer/deelnemer_detail.html' %}
+    {% endif%}
+{% else %}
+    h1>Welkom</h1>
+{% endif %}
+
+
+<p>Selecteer een item uit bovenstaande menu.</p>
+
+{% endblock %}

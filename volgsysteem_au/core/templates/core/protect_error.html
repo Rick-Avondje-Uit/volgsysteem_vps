@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+<title>Fout</title>
+{% endblock %}
+
+{% block body_block %}
+  <h2>Fout bij het verwijderen van het object</h2>
+  <p>{{ error_message }}</p>
+  <ul>
+    {% for object in objects %}
+      <li>{{object.deelnemer.naam}}</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'core:begeleider_list' %}" class="btn btn-secondary">Terug naar de lijst</a>
+{% endblock %}

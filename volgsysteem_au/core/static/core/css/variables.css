@@ -1,0 +1,105 @@
+/*
+ * Avondje Uit Volgsysteem
+ * Centrale huisstijlvariabelen
+ */
+
+:root {
+    /* Primaire huisstijlkleuren */
+    --color-primary: #5b3f92;
+    --color-primary-dark: #442c73;
+    --color-primary-darker: #332055;
+    --color-primary-light: #eee9f7;
+
+    /* Accentkleuren */
+    --color-accent: #f39200;
+    --color-accent-dark: #d77f00;
+    --color-accent-light: #fff2dc;
+
+    /* Algemene kleuren */
+    --color-background: #f5f6f8;
+    --color-surface: #ffffff;
+
+    --color-text: #292929;
+    --color-text-muted: #686868;
+    --color-text-light: #ffffff;
+
+    --color-border: #dddddd;
+    --color-border-dark: #c7c7c7;
+
+    /* Statuskleuren */
+    --color-success: #277c4d;
+    --color-success-background: #e7f4ec;
+
+    --color-warning: #9b6500;
+    --color-warning-background: #fff2d3;
+
+    --color-danger: #b52d34;
+    --color-danger-dark: #92252a;
+    --color-danger-background: #fbe8e9;
+
+    --color-info: #2c6f91;
+    --color-info-background: #e8f3f8;
+
+    /* Typografie */
+    --font-family-base:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    --font-size-base: 16px;
+    --font-size-small: 14px;
+    --font-size-smaller: 13px;
+    --font-size-large: 18px;
+
+    --line-height-base: 1.5;
+    --line-height-heading: 1.25;
+
+    /* Afrondingen */
+    --border-radius-small: 8px;
+    --border-radius: 12px;
+    --border-radius-large: 16px;
+    --border-radius-pill: 999px;
+
+    /* Schaduwen */
+    --shadow-small:
+        0 1px 4px rgba(0, 0, 0, 0.08);
+
+    --shadow:
+        0 5px 16px rgba(0, 0, 0, 0.09);
+
+    --shadow-large:
+        0 10px 28px rgba(0, 0, 0, 0.12);
+
+    /* Layout */
+    --container-width: 1280px;
+    --header-height: 78px;
+    --navigation-height: 54px;
+
+    /* Overgangen */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
+
+    /* Focusring */
+    --focus-ring:
+        0 0 0 3px rgba(91, 63, 146, 0.18);
+
+    /* Z-indexlagen */
+    --z-index-navigation: 100;
+    --z-index-dropdown: 200;
+    --z-index-modal: 1000;
+
+    /* Aanvullende oppervlakken */
+    --color-surface-muted: #fafafa;
+    --color-surface-subtle: #f0f0f0;
+    --color-hover: #faf9fc;
+
+    /* Navigatie */
+    --color-navigation: #2c2c2c;
+    --color-navigation-hover: #464646;
+
+    /* Focus */
+    --color-focus: #f5b800;
+
+    /* Kritieke tekst */
+    --color-critical: #c90000;
+}

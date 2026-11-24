@@ -1,0 +1,438 @@
+/*
+ * Avondje Uit Volgsysteem
+ * Herbruikbare componenten
+ */
+
+/* =========================================================
+   Knoppen
+   ========================================================= */
+
+.btn {
+    min-height: 40px;
+    padding: 8px 16px;
+
+    border-radius: var(--border-radius-small);
+
+    font-weight: 600;
+
+    transition:
+        color var(--transition-fast),
+        background-color var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.btn:hover {
+    text-decoration: none;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn:focus,
+.btn:focus-visible {
+    outline: none;
+
+    box-shadow: var(--focus-ring);
+}
+
+.btn-primary {
+    color: var(--color-text-light);
+    background: var(--color-primary);
+
+    border-color: var(--color-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:active:hover,
+.btn-primary:active:focus {
+    color: var(--color-text-light);
+    background: var(--color-primary-dark);
+
+    border-color: var(--color-primary-dark);
+}
+
+.btn-secondary {
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border-color: var(--color-border-dark);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+    color: var(--color-primary-dark);
+    background-color: var(--color-primary-light);
+    border-color: var(--color-border-dark);
+}
+
+.btn-warning {
+    color: var(--color-text-light);
+    background: var(--color-accent);
+
+    border-color: var(--color-accent);
+}
+
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active {
+    color: var(--color-text-light);
+    background: var(--color-accent-dark);
+
+    border-color: var(--color-accent-dark);
+}
+
+.btn-danger {
+    color: var(--color-text-light);
+    background: var(--color-danger);
+
+    border-color: var(--color-danger);
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active {
+    color: var(--color-text-light);
+    background: var(--color-danger-dark);
+
+    border-color: var(--color-danger-dark);
+}
+
+.btn-link {
+    color: var(--color-primary);
+}
+
+.btn-link:hover,
+.btn-link:focus {
+    color: var(--color-primary-dark);
+}
+
+.btn[disabled],
+.btn.disabled,
+fieldset[disabled] .btn {
+    cursor: not-allowed;
+
+    opacity: 0.55;
+}
+
+/* =========================================================
+   Knoppengroepen en actiebalken
+   ========================================================= */
+
+.action-bar {
+    margin-bottom: 24px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.action-bar--right {
+    justify-content: flex-end;
+}
+
+.action-bar--between {
+    justify-content: space-between;
+}
+
+/* =========================================================
+   Django messages
+   ========================================================= */
+
+.messages {
+    margin-bottom: 24px;
+}
+
+.alert {
+    position: relative;
+
+    margin-bottom: 12px;
+    padding: 14px 48px 14px 16px;
+
+    display: flex;
+    align-items: flex-start;
+
+    border: 0;
+    border-left: 4px solid;
+    border-radius: var(--border-radius-small);
+
+    box-shadow: var(--shadow-small);
+}
+
+.alert:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================================================
+   Message content
+   ========================================================= */
+
+.alert__content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+/* =========================================================
+   Success
+   ========================================================= */
+
+.alert--success,
+.alert-success {
+    color: var(--color-success);
+    background: var(--color-success-background);
+
+    border-left-color: var(--color-success);
+}
+
+/* =========================================================
+   Error / danger
+   ========================================================= */
+
+.alert--error,
+.alert-error,
+.alert-danger {
+    color: var(--color-danger);
+    background: var(--color-danger-background);
+
+    border-left-color: var(--color-danger);
+}
+
+/* =========================================================
+   Warning
+   ========================================================= */
+
+.alert--warning,
+.alert-warning {
+    color: var(--color-warning);
+    background: var(--color-warning-background);
+
+    border-left-color: var(--color-warning);
+}
+
+/* =========================================================
+   Info
+   ========================================================= */
+
+.alert--info,
+.alert-info {
+    color: var(--color-info);
+    background: var(--color-info-background);
+
+    border-left-color: var(--color-info);
+}
+
+/* =========================================================
+   Sluitknop
+   ========================================================= */
+
+.alert__close {
+    position: absolute;
+
+    top: 50%;
+    right: 4px;
+
+    width: 30px;
+    height: 30px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: currentColor;
+    background: transparent;
+
+    border: 0;
+    border-radius: var(--border-radius-small);
+
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1;
+
+    cursor: pointer;
+
+    opacity: .65;
+
+    transform: translateY(-50%);
+
+    transition:
+        opacity var(--transition-fast),
+        background-color var(--transition-fast);
+}
+
+.alert__close:hover,
+.alert__close:focus {
+    color: currentColor;
+    background: rgba(0, 0, 0, 0.05);
+
+    opacity: 1;
+}
+
+.alert__close:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* =========================================================
+   Badges en labels
+   ========================================================= */
+
+.badge {
+    padding: 5px 9px;
+
+    color: var(--color-text-light);
+    background: var(--color-primary);
+
+    border-radius: var(--border-radius-pill);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   Dialog
+   ========================================================= */
+
+.dialog {
+    width: min(500px, calc(100% - 32px));
+    max-height: calc(100vh - 32px);
+    padding: 0;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 0;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow);
+}
+
+.dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog__content {
+    margin: 0;
+}
+
+.dialog__header {
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    background: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+.dialog__title {
+    margin: 0;
+    color: inherit;
+    font-size: 20px;
+}
+
+.dialog__close {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: inherit;
+    background: transparent;
+    border: 0;
+    border-radius: var(--border-radius-small);
+
+    font-size: 28px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.dialog__close:hover,
+.dialog__close:focus {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.dialog__close:focus-visible {
+    outline: 2px solid var(--color-text-light);
+    outline-offset: 2px;
+}
+
+.dialog__body {
+    padding: 24px;
+}
+
+.dialog__footer {
+    padding: 16px 24px;
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    background: #fafafa;
+    border-top: 1px solid var(--color-border);
+}
+
+/* =========================================================
+   Bestaande projectclasses
+   ========================================================= */
+
+.bigbrand {
+    font-size: 1.5em;
+}
+
+.centerstage {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.rode-datum,
+.rode-rij {
+    color: #c90000;
+}
+
+/* =========================================================
+   Responsieve componenten
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .action-bar {
+        align-items: stretch;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .card {
+        padding: 18px;
+    }
+
+    .card__header {
+        margin: -18px -18px 18px;
+        padding: 16px 18px;
+    }
+
+    .card__footer {
+        margin: 18px -18px -18px;
+        padding: 16px 18px;
+    }
+
+    .action-bar,
+    .action-bar--right,
+    .action-bar--between {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .action-bar .btn {
+        width: 100%;
+    }
+}

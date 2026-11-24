@@ -1,0 +1,28 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block main_title %}
+    <title>Deelnemers</title>
+{% endblock main_title %}
+
+{% block body_block %}
+    <h1>Deelnemerslijst</h1>
+
+    <form id="deelnemerZoekForm" method="get" data-search-url="{% url 'core:suggesties_api' %}">
+        <div class="mb-3">
+            <label for="deelnemer-zoekveld" class="form-label">Zoek deelnemer</label>
+
+            <input type="search" id="deelnemer-zoekveld" name="deelnemer" list="deelnemers-lijst" autocomplete="off" class="form-control">
+
+            <datalist id="deelnemers-lijst"></datalist>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Zoek</button>
+    </form>
+
+    <div id="deelnemers-resultaten" aria-live="polite"></div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'core/js/deelnemer-zoek.js' %}" defer></script>
+{% endblock %}

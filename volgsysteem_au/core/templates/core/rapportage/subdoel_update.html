@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Subdoel</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Bewerk subdoel {{subdoel}}</h1>
+    <form method="post" action="{% url 'core:subdoel_update' pk %}">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit">Opslaan</button>
+    </form>
+{% endblock %}

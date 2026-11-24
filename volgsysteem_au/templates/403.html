@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 Forbidden</title>
+</head>
+<body>
+    <h1>Geen toegang</h1>
+    {% if user.is_authenticated %}
+        <p>Je hebt geen toestemming om deze pagina te bekijken.</p>
+        <p><a href="{% url 'core:index' %}">Terug</a></p>
+    {% else %}
+        <p>Klik <a href="{% url 'login' %}">hier</a> om in te loggen</p>
+    {% endif %}
+    
+</body>
+</html>

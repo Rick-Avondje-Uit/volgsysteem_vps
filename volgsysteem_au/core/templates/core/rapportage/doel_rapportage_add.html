@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Rapportage</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Voeg rapportage toe</h1>
+    <h3>Doel van {{doel.hoofddoel.deelnemer}}</h3>
+    <h4>Tekst van subdoel: {{doel.tekst}}</h4>
+    <form method="post" action="{% url 'core:add_rapportage_doel' doel.id %}">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit">Opslaan</button>
+    </form>
+{% endblock %}

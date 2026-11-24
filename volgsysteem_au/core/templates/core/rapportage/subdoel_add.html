@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Subdoeldoel</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Voeg Subddoel toe aan {{hoofddoel}}</h1>
+    <form method="post" action="{% url 'core:subdoel_add' pk %}">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit">Opslaan</button>
+    </form>
+{% endblock %}

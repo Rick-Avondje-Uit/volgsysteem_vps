@@ -1,0 +1,52 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block main_title %}
+    <title>Resultaten vragenlijst</title>
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/css/vragenlijst-resultaten.css' %}">
+{% endblock %}
+
+{% block body_block %}
+    <h1>Resultaten vragenlijst</h1>
+    {% if no_df %}
+        <p class="message message--info">Deze deelnemer heeft nog geen vragenlijst ingevuld.</p>
+    {% else %}
+        <section class="vragenlijst-resultaten">
+            <section class="vragenlijst-resultaten__categorie">
+                <h2>Zelfvertrouwen</h2>
+                {{ data_0|safe }}
+            </section>
+            <section class="vragenlijst-resultaten__categorie">
+                <h2>Communicatieve vaardigheden</h2>
+                {{ data_1|safe }}
+            </section>
+            <section class="vragenlijst-resultaten__categorie">
+                <h2>Samenwerken</h2>
+                {{ data_2|safe }}
+            </section>
+            <section class="vragenlijst-resultaten__categorie">
+                <h2>Initiatief nemen</h2>
+                {{ data_3|safe }}
+            </section>
+            <section class="vragenlijst-resultaten__categorie">
+                <h2>Invoelend vermogen</h2>
+                {{ data_4|safe }}
+            </section>
+            <section class="vragenlijst-resultaten__categorie">
+                <h2>Verantwoordelijkheid nemen</h2>
+                {{ data_5|safe }}
+            </section>
+            <section class="vragenlijst-resultaten__categorie">
+                <h2>Overige vragen</h2>
+                {{ data_6|safe }}
+            </section>
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'core/js/vragenlijst-resultaten.js' %}" defer></script>
+{% endblock %}

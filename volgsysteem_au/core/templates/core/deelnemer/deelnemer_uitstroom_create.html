@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Deelnemer</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Deelnemer uitstromen</h1>
+    <p>Weet je zeker dat<strong>{{ deelnemer }}</strong>is uitgestroomd?</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="action-bar">
+            <button type="submit" class="btn btn-danger">Uitgestroomd</button>
+            <a href="{% url 'core:deelnemer_list' %}" class="btn btn-secondary">Annuleren</a>
+        </div>
+    </form>
+{% endblock %}

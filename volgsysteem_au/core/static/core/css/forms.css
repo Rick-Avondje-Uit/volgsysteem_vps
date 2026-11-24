@@ -1,0 +1,347 @@
+/*
+ * Avondje Uit Volgsysteem
+ * Formulieren en invoervelden
+ */
+
+/* =========================================================
+   Formulierstructuur
+   ========================================================= */
+
+form {
+    margin: 0;
+}
+
+/* =========================================================
+   Labels
+   ========================================================= */
+
+.form-label {
+    margin-bottom: 6px;
+
+    color: var(--color-text);
+    font-weight: 700;
+}
+
+.required .form-label::after,
+.form-label.required::after {
+    margin-left: 3px;
+
+    color: var(--color-danger);
+
+    content: "*";
+}
+
+
+/* =========================================================
+   Invoervelden
+   ========================================================= */
+
+.form-control,
+.form-select {
+    min-height: 44px;
+
+    color: var(--color-text);
+    background-color: var(--color-surface);
+
+    border-color: var(--color-border);
+    border-radius: var(--border-radius-small);
+
+    box-shadow: none;
+
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background-color var(--transition-fast);
+}
+
+.form-control:hover,
+.form-select:hover {
+    border-color: var(--color-border-dark);
+}
+
+.form-control:focus,
+.form-select:focus {
+    color: var(--color-text);
+    background-color: var(--color-surface);
+
+    border-color: var(--color-primary);
+
+    box-shadow: var(--focus-ring);
+}
+
+/* =========================================================
+   Placeholder
+   ========================================================= */
+
+.form-control::placeholder {
+    color: #888888;
+    opacity: 1;
+}
+
+/* =========================================================
+   Selectvelden
+   ========================================================= */
+
+.form-select {
+    cursor: pointer;
+}
+
+/* =========================================================
+   Textarea
+   ========================================================= */
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* =========================================================
+   Nederlandse datumvelden
+   ========================================================= */
+
+.form-control[inputmode="numeric"] {
+    font-variant-numeric: tabular-nums;
+}
+
+/* =========================================================
+   Uitgeschakelde en alleen-lezen velden
+   ========================================================= */
+
+.form-control:disabled,
+.form-select:disabled,
+.form-control[readonly] {
+    color: var(--color-text-muted);
+    background-color: #eeeeee;
+
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.form-control[readonly] {
+    cursor: default;
+}
+
+/* =========================================================
+   Checkboxes en radiobuttons
+   ========================================================= */
+
+.form-check-input {
+    width: 18px;
+    height: 18px;
+
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.form-check-input:focus {
+    border-color: var(--color-primary);
+
+    box-shadow: var(--focus-ring);
+}
+
+.form-check-label {
+    cursor: pointer;
+}
+
+/* =========================================================
+   Bestandsvelden
+   ========================================================= */
+
+.form-control[type="file"] {
+    min-height: 44px;
+}
+
+.form-control[type="file"]::file-selector-button {
+    color: var(--color-primary-dark);
+    background-color: var(--color-primary-light);
+
+    font-weight: 600;
+}
+
+.form-control[type="file"]::file-selector-button:hover {
+    color: var(--color-text-light);
+    background-color: var(--color-primary);
+}
+
+/* =========================================================
+   Helptekst
+   ========================================================= */
+
+.form-text,
+.helptext {
+    display: block;
+
+    margin-top: 6px;
+    margin-bottom: 0;
+
+    color: var(--color-text-muted);
+
+    font-size: var(--font-size-small);
+}
+
+/* =========================================================
+   Django validatiefouten
+   ========================================================= */
+
+.errorlist {
+    padding: 0;
+    margin: 6px 0 0;
+
+    color: var(--color-danger);
+
+    font-size: var(--font-size-small);
+    font-weight: 600;
+
+    list-style: none;
+}
+
+.errorlist li {
+    margin: 0;
+}
+
+/* =========================================================
+   Bootstrap validatiestatus
+   ========================================================= */
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: var(--color-danger);
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+    border-color: var(--color-danger);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(181, 45, 52, 0.16);
+}
+
+.form-control.is-valid,
+.form-select.is-valid {
+    border-color: var(--color-success);
+}
+
+.form-control.is-valid:focus,
+.form-select.is-valid:focus {
+    border-color: var(--color-success);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(39, 124, 77, 0.16);
+}
+
+/* =========================================================
+   Eigen formulier-grid
+   ========================================================= */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.form-row--three {
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+}
+
+/* =========================================================
+   Formulieracties
+   ========================================================= */
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 24px;
+}
+
+/* =========================================================
+   Zoekformulier
+   ========================================================= */
+
+.search-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+
+    margin-bottom: 24px;
+}
+
+.search-form__field {
+    flex: 1;
+}
+
+.search-form__actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* =========================================================
+   Bootstrap input-groups
+   ========================================================= */
+
+.input-group .form-control,
+.input-group .form-select,
+.input-group .input-group-text,
+.input-group .btn {
+    min-height: 44px;
+}
+
+.input-group-text {
+    color: var(--color-primary-dark);
+    background-color: var(--color-primary-light);
+
+    border-color: var(--color-border);
+}
+
+/* =========================================================
+   Responsieve formulieren
+   ========================================================= */
+
+@media (max-width: 768px) {
+    .form-row,
+    .form-row--three {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+    .search-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-form__actions {
+        width: 100%;
+    }
+
+    .search-form__actions .btn {
+        flex: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+
+    .search-form__actions {
+        flex-direction: column;
+    }
+}

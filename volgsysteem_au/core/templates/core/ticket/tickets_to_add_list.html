@@ -1,0 +1,66 @@
+{% extends "core/base.html" %}
+
+{% block main_title %}
+    <title>Tickets toevoegen</title>
+{% endblock %}
+
+{% block body_block %}
+    {% if geen_tickets %}
+        <h1>Geen nieuwe tickets om te importeren</h1>
+    {% else %}
+        <h1>Tickets</h1>
+        <form method="post" action="{% url 'core:import_tickets' %}">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle TicketTable">
+                    <thead>
+                        <tr>
+                            <th>Activiteit</th>
+                            <th>Datum activiteit</th>
+                            <th>Deelnemer op ticket</th>
+                            <th>Deelnemer</th>
+                            <th>Importeren</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for ticket in formset.forms %}
+                            <tr>
+                                <td>{{ ticket.activiteit_naam}}</td>
+                                <td>{{ ticket.activiteit_datum}}</td>
+                                <td>{{ ticket.deelnemer_naam_ticket }}</td>
+                                <td>{{ ticket.deelnemer }}</td>
+                                <td>{{ ticket.importeren }}</td>
+                                {{ ticket.bedrag.as_hidden }}
+                                {{ ticket.type_ticket.as_hidden }}
+                                {{ ticket.activiteit.as_hidden }}
+                                {{ ticket.hash_value.as_hidden }}
+                                {{ ticket.gekocht_op.as_hidden }}
+                            </tr>
+                        {% endfor %}
+                        {{ formset_overig.management_form }}
+                        {% for ticket in formset_overig.forms %}
+                            <tr>
+                                <td>{{ ticket.activiteit_naam }}</td>
+                                <td>{{ ticket.activiteit_datum }}</td>
+                                <td>{{ ticket.deelnemer_naam_ticket }}</td>
+                                <td>{{ ticket.deelnemer_naam }}</td>
+                                <td>{{ ticket.importeren }}</td>
+                                {{ ticket.bedrag.as_hidden }}
+                                {{ ticket.deelnemer.as_hidden }}
+                                {{ ticket.type_ticket.as_hidden }}
+                                {{ ticket.activiteit.as_hidden }}
+                                {{ ticket.hash_value.as_hidden }}
+                                {{ ticket.gekocht_op.as_hidden }}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="action-bar">
+                <button type="submit" class="btn btn-primary">Tickets importeren</button>
+            </div>
+        </form>
+    {% endif %}
+{% endblock %}

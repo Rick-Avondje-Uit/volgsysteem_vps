@@ -1,0 +1,12 @@
+/*
+ * Avondje Uit Volgsysteem
+ * Centraal CSS-entrypoint
+ */
+
+@import url("variables.css");
+@import url("base.css");
+@import url("navbar.css");
+@import url("components.css");
+@import url("forms.css");
+@import url("tables.css");
+@import url("deelnemer.css");
